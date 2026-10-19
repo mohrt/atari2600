@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.DS_Store
+
+# Files supplied locally
+roms/
+public/games/
+tests/fixtures/dormann/

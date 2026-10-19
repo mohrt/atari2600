@@ -1,0 +1,71 @@
+{
+  "games": [
+    {
+      "title": "2048 2600",
+      "file": "2048-2600.bin",
+      "url": "https://raw.githubusercontent.com/chesterbr/2048-2600/main/2048.bin",
+      "sha256": "c85dc2204299b0a29209d3f80ae112678c171dab216719593625647d2436f1e1",
+      "credit": "Carlos Duarte do Nascimento (Chester), 2014",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/chesterbr/2048-2600/main/LICENSE",
+      "sourceUrl": "https://github.com/chesterbr/2048-2600",
+      "hint": "Joystick slides the tiles. Reset starts a new game."
+    },
+    {
+      "title": "Berta and Butterflies",
+      "file": "berta-and-butterflies.bin",
+      "url": "https://github.com/vandalton/BertaAndButterflies/releases/download/v1.00/berta-and-butterflies.v1.00.ntsc.en.bin",
+      "sha256": "3e0efbbf4aba069cbe06d5bf2795c2110914aa40e378743cfcc40321aae3928d",
+      "credit": "vandalton, 2024",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/vandalton/BertaAndButterflies/main/LICENSE",
+      "sourceUrl": "https://github.com/vandalton/BertaAndButterflies",
+      "hint": "Joystick left and right catches the butterflies. Fire starts."
+    },
+    {
+      "title": "Cyloid",
+      "file": "cyloid.bin",
+      "url": "https://raw.githubusercontent.com/keithadler/cyloid/main/cyloid.rom",
+      "sha256": "1f000378288dedd61cbb4970f53d66cbd82406bad5f48127db683d2c3954e12a",
+      "credit": "Keith Adler",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/keithadler/cyloid/main/LICENSE",
+      "sourceUrl": "https://github.com/keithadler/cyloid",
+      "hint": "Joystick drives the tank, fire shoots."
+    },
+    {
+      "title": "Four-Paddle Tester",
+      "file": "four-paddle-tester.bin",
+      "url": "https://github.com/alijani1/atari2600-4paddle-tester/releases/download/v1.0.0/atari2600-4paddle-tester.a26",
+      "sha256": "c8e3730341cd64af54a418911d5fcbce61d76160250dad854b12ee6881fca98b",
+      "credit": "alijani1, 2026",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/alijani1/atari2600-4paddle-tester/main/LICENSE",
+      "sourceUrl": "https://github.com/alijani1/atari2600-4paddle-tester",
+      "hint": "Shows all four paddles. Click the screen and move the mouse, or turn with a stick or the arrow keys.",
+      "controller": "paddles"
+    },
+    {
+      "title": "Paul's HappyBird",
+      "file": "happybird.bin",
+      "url": "https://github.com/steux/happybird/releases/download/v1.08/happybird-v1.08-NTSC-PLUSROM.bin",
+      "sha256": "49cb3bf6fece0ea23fe808f99a1ef01c49faea7c9ec44941c9d6b4dfe3619ae4",
+      "credit": "Bruno Steux, 2023",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/steux/happybird/main/LICENSE",
+      "sourceUrl": "https://github.com/steux/happybird",
+      "hint": "Fire flaps. Set the left difficulty to A for Pro mode; the Colour/B&W switch pauses."
+    },
+    {
+      "title": "Snakes",
+      "file": "snakes.bin",
+      "url": "https://raw.githubusercontent.com/RobinSergeant/2600-Snakes/master/snakes.bin",
+      "sha256": "fd74f6bd41770ee8b75fa69b316fddc055583dc4d7096aefe8a8b7cf7a4f56d4",
+      "credit": "Robin Sergeant, 2020",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/RobinSergeant/2600-Snakes/master/license.txt",
+      "sourceUrl": "https://github.com/RobinSergeant/2600-Snakes",
+      "hint": "Joystick steers the snake."
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+import type { MachineState } from '../atari2600';
+import type { SchemeName } from '../cart/cartridge';
+import type { ControllerType } from '../io/controllers/types';
+import { decodeState, encodeState } from '../state/snapshot';
+import type { KeyValueStore } from './store';
+
+/** Everything needed to resume a game: the machine, its cartridge and how it was set up. */
+export interface Session {
+  machine: MachineState;
+  /** The cartridge image (2600 ROMs are small, so states carry their own). */
+  rom: Uint8Array;
+  romName: string;
+  title: string;
+  scheme: SchemeName;
+  controllers: [ControllerType, ControllerType];
+  switches: { color: boolean; leftDifficultyA: boolean; rightDifficultyA: boolean };
+}
+
+export interface SaveStateRecord {
+  name: string;
+  created: number;
+  /** The session, gzipped (the same format as exported .a26state files). */
+  bytes: Uint8Array;
+}
+
+export interface SaveStateInfo {
+  id: string;
+  name: string;
+  created: number;
+}
+
+/** Older states are dropped beyond this many. */
+const MAX_STATES = 30;
+
+/** Save states kept in browser storage, newest first. */
+export class SaveStates {
+  constructor(private readonly store: KeyValueStore<SaveStateRecord>) {}
+
+  async add(name: string, session: Session): Promise<void> {
+    const created = Date.now();
+    await this.store.put(`state-${created}`, { name, created, bytes: await encodeSession(session) });
+    const all = await this.list();
+    for (const old of all.slice(MAX_STATES)) await this.store.delete(old.id);
+  }
+
+  async list(): Promise<SaveStateInfo[]> {
+    const entries = await this.store.entries();
+    return entries.map(([id, record]) => ({ id, name: record.name, created: record.created })).sort((a, b) => b.created - a.created);
+  }
+
+  async load(id: string): Promise<Session | null> {
+    const record = await this.store.get(id);
+    return record ? decodeSession(record.bytes) : null;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.store.delete(id);
+  }
+}
+
+const MAGIC = 'atari2600-session';
+
+export async function encodeSession(session: Session): Promise<Uint8Array> {
+  return encodeState({ magic: MAGIC, ...session });
+}
+
+export async function decodeSession(bytes: Uint8Array): Promise<Session> {
+  const decoded = await decodeState<Session & { magic?: string }>(bytes).catch(() => null);
+  if (decoded?.magic !== MAGIC) throw new Error('That file is not an Atari 2600 save state.');
+  return decoded;
+}

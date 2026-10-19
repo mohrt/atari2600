@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#111111" />
+    <title>Atari 2600</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="screen-frame">
+        <canvas id="screen" width="160" height="216" tabindex="0" aria-label="Atari 2600 screen"></canvas>
+        <p class="paused-label">Paused</p>
+        <p class="insert-label">Insert a cartridge</p>
+        <div id="touch-controls" class="touch-controls" data-controller="joystick" hidden>
+          <div class="touch-left">
+            <div class="touch-stick" aria-label="Joystick"><span class="touch-knob"></span></div>
+            <div class="touch-strip" aria-label="Turn the paddle"><span>◀ drag to turn ▶</span></div>
+            <div class="touch-keypad" aria-label="Keypad"></div>
+          </div>
+          <div class="touch-right">
+            <div class="touch-console">
+              <button type="button" data-touch="select">Select</button>
+              <button type="button" data-touch="reset">Reset</button>
+            </div>
+            <button type="button" class="touch-fire" data-touch="fire" aria-label="Fire">FIRE</button>
+          </div>
+        </div>
+      </div>
+
+      <section id="toolbar" class="toolbar" aria-label="Console">
+        <span class="toolbar-group">
+          <button type="button" data-action="pause" title="Pause key">Pause</button>
+          <button type="button" data-action="power" title="Switch the console off and on again">Power cycle</button>
+          <button type="button" data-action="fullscreen" title="Esc leaves full screen">Full screen</button>
+          <select name="tv" aria-label="TV standard" title="Auto follows the game's frame rate">
+            <option value="auto" selected>TV: Auto</option>
+            <option value="ntsc">NTSC (60 Hz)</option>
+            <option value="pal">PAL (50 Hz)</option>
+            <option value="secam">SECAM</option>
+          </select>
+        </span>
+        <span class="toolbar-group console-switches">
+          <button type="button" class="hold" data-console="select" title="Game Select (F1)">Select</button>
+          <button type="button" class="hold" data-console="reset" title="Game Reset (F2)">Reset</button>
+          <select name="tv-type" aria-label="TV type switch" title="F3 colour, F4 black and white">
+            <option value="color" selected>Colour</option>
+            <option value="bw">B&amp;W</option>
+          </select>
+          <select name="left-difficulty" aria-label="Left difficulty switch" title="F5 A, F6 B">
+            <option value="a">Left: A</option>
+            <option value="b" selected>Left: B</option>
+          </select>
+          <select name="right-difficulty" aria-label="Right difficulty switch" title="F7 A, F8 B">
+            <option value="a">Right: A</option>
+            <option value="b" selected>Right: B</option>
+          </select>
+        </span>
+        <span class="toolbar-group">
+          <button type="button" data-action="save-state" title="Save the whole console, to come back to later">
+            Save state
+          </button>
+          <select name="state-slot" aria-label="Save states"></select>
+          <button type="button" data-action="load-state">Load</button>
+          <button type="button" data-action="delete-state">Delete</button>
+          <button type="button" data-action="export-state" title="Download the current state as a file">Export</button>
+          <button type="button" data-action="import-state">Import...</button>
+        </span>
+        <span class="toolbar-message" role="status"></span>
+        <input type="file" name="state-file" accept=".a26state" hidden />
+      </section>
+
+      <section id="cart-panel" class="cart-panel" data-state="empty" aria-label="Cartridge slot">
+        <div class="cart-empty">
+          <p class="cart-title">Drop a .a26, .bin or .zip cartridge image here</p>
+          <button type="button" data-action="choose">Choose file...</button>
+        </div>
+        <div class="cart-loaded">
+          <p class="cart-title"><span class="cart-name"></span> <span class="cart-file"></span></p>
+          <div class="cart-actions">
+            <button type="button" data-action="choose">Change cartridge</button>
+            <button type="button" data-action="eject">Eject</button>
+            <label title="How the cartridge switches banks; Auto detects it">
+              Bank switching
+              <select name="scheme"></select>
+            </label>
+          </div>
+        </div>
+        <p class="zip-files" hidden>In this zip: <span class="zip-buttons"></span></p>
+        <div class="bundled-games" hidden>
+          <p class="bundled-games-row">
+            Free games:
+            <select name="bundled-game" aria-label="Free games"></select>
+            <button type="button" data-action="play-game">Play</button>
+          </p>
+          <p class="game-info"></p>
+        </div>
+        <p class="cart-drop-hint">Release to insert</p>
+        <p class="cart-message" role="status"></p>
+        <input type="file" accept=".a26,.bin,.rom,.zip,.a26state" hidden />
+      </section>
+
+      <section id="controls" class="controls" aria-label="Controllers">
+        <div class="controls-row players">
+          <span class="player" data-player="1">
+            <strong>Player 1</strong>
+            <select name="player1-keys" aria-label="Player 1 keys">
+              <option value="off">No keys</option>
+              <option value="arrows" selected>Arrow keys, Space fires</option>
+              <option value="wasd">W A S D, F fires</option>
+              <option value="numpad">Numpad 8 4 6 2, 0 fires</option>
+            </select>
+            <select name="player1-pad" aria-label="Player 1 gamepad"></select>
+            <button type="button" data-action="remap" data-player="1" title="Choose which buttons do what">Remap...</button>
+          </span>
+          <button type="button" data-action="swap-players" title="Swap player 1's and player 2's keys and gamepads">
+            Swap
+          </button>
+          <span class="player" data-player="2">
+            <strong>Player 2</strong>
+            <select name="player2-keys" aria-label="Player 2 keys">
+              <option value="off" selected>No keys</option>
+              <option value="arrows">Arrow keys, Space fires</option>
+              <option value="wasd">W A S D, F fires</option>
+              <option value="numpad">Numpad 8 4 6 2, 0 fires</option>
+            </select>
+            <select name="player2-pad" aria-label="Player 2 gamepad"></select>
+            <button type="button" data-action="remap" data-player="2" title="Choose which buttons do what">Remap...</button>
+          </span>
+        </div>
+        <div class="controls-row">
+          <label title="What is plugged into the left port (player 1)">
+            Left port
+            <select name="left-controller"></select>
+          </label>
+          <label title="What is plugged into the right port (player 2)">
+            Right port
+            <select name="right-controller"></select>
+          </label>
+          <label title="Blend each frame with the last, so flickering sprites look solid">
+            <input type="checkbox" name="phosphor" /> Phosphor
+          </label>
+          <label>
+            Touch controls
+            <select name="touch-controls">
+              <option value="auto" selected>Auto</option>
+              <option value="on">On</option>
+              <option value="off">Off</option>
+            </select>
+          </label>
+        </div>
+        <div class="controls-row">
+          <label title="Shows which directions and buttons each gamepad sends">
+            <input type="checkbox" name="show-gamepad-input" /> Show gamepad input
+          </label>
+          <label><input type="checkbox" name="sound" checked /> Sound</label>
+          <label>
+            Volume
+            <input type="range" name="volume" min="0" max="1" step="0.05" value="0.8" />
+          </label>
+          <span class="sound-hint" hidden>Click or press a key to start sound</span>
+        </div>
+        <div class="remap" hidden>
+          <p class="remap-prompt"></p>
+          <p class="remap-actions">
+            <button type="button" data-action="remap-skip">Skip</button>
+            <button type="button" data-action="remap-defaults">Use the usual buttons</button>
+            <button type="button" data-action="remap-cancel">Cancel</button>
+          </p>
+        </div>
+        <div class="gamepad-status" aria-live="polite" hidden></div>
+        <p class="controls-hint">
+          Gamepads and USB joysticks work as soon as you press one of their buttons; the first is player 1, the
+          second player 2. If a stick isn't recognised, use Remap. Paddle games: click the screen to turn the paddle
+          with the mouse (Esc lets go), or use a stick, the arrow keys, or a Stelladaptor. Console: F1 Select, F2
+          Reset, F3/F4 colour/B&amp;W, F5-F8 difficulty; a gamepad's Start is Reset and Back is Select.
+        </p>
+      </section>
+
+      <p id="status">Starting...</p>
+      <footer class="site-links">
+        <a href="https://github.com/mohrt/atari2600" target="_blank" rel="noopener">Source on GitHub</a>
+        <a href="https://x.com/mohrt" target="_blank" rel="noopener">@mohrt on X</a>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

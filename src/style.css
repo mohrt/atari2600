@@ -1,0 +1,539 @@
+:root {
+  /* Updated from the TV standard in use: 160 pixels wide, as tall as the window of lines shown. */
+  --screen-aspect: 1.3333;
+  --screen-width: min(96vw, calc(72vh * var(--screen-aspect)));
+  --accent: #e8743b;
+  --accent-soft: #f2a273;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  background: #111;
+  color: #888;
+  font-family: system-ui, sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  gap: 0.75rem;
+  padding: 1rem 0;
+  box-sizing: border-box;
+}
+
+.screen-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+#screen {
+  display: block;
+  width: var(--screen-width);
+  aspect-ratio: var(--screen-aspect);
+  image-rendering: pixelated;
+  outline: none;
+  background: #000;
+}
+
+.screen-frame:fullscreen {
+  background: #000;
+}
+
+.screen-frame:fullscreen #screen {
+  width: min(100vw, calc(100vh * var(--screen-aspect)));
+}
+
+.paused-label,
+.insert-label {
+  display: none;
+  position: absolute;
+  top: calc(var(--screen-width) / var(--screen-aspect) / 2);
+  margin: 0;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  background: rgb(0 0 0 / 70%);
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.screen-frame.paused .paused-label,
+.screen-frame.no-cartridge .insert-label {
+  display: block;
+}
+
+.screen-frame.paused.no-cartridge .insert-label {
+  display: none;
+}
+
+#status {
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+.site-links {
+  display: flex;
+  gap: 1.25rem;
+  font-size: 0.85rem;
+}
+
+.site-links a {
+  color: var(--accent-soft);
+  text-decoration: none;
+}
+
+.site-links a:hover,
+.site-links a:focus-visible {
+  text-decoration: underline;
+}
+
+/* Buttons and fields */
+
+.toolbar button,
+.toolbar select,
+.controls select,
+.controls button,
+.cart-panel button,
+.cart-panel select {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #555;
+  border-radius: 6px;
+  background: #2a2a2a;
+  color: #eee;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.toolbar select,
+.controls select,
+.cart-panel select {
+  max-width: 16rem;
+  padding: 0.35rem 0.4rem;
+}
+
+button:hover,
+button:focus-visible,
+select:focus-visible {
+  border-color: var(--accent) !important;
+  outline: none;
+}
+
+button:disabled,
+select:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* Toolbar */
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  width: var(--screen-width);
+}
+
+.toolbar-group {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.console-switches {
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #3b2617, #4a3020 50%, #3b2617);
+}
+
+.console-switches button.hold.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #111;
+}
+
+.toolbar-message {
+  font-size: 0.85rem;
+  color: #9ad284;
+}
+
+.toolbar-message.error {
+  color: #ff8a80;
+}
+
+/* Controls */
+
+.controls {
+  width: var(--screen-width);
+  box-sizing: border-box;
+  color: #bbb;
+  font-size: 0.9rem;
+}
+
+.controls-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.controls label,
+.player {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.controls-row + .controls-row {
+  margin-top: 0.6rem;
+}
+
+.player strong {
+  color: #ddd;
+  font-weight: 600;
+}
+
+.controls input[type='range'] {
+  width: 6rem;
+  accent-color: var(--accent);
+}
+
+.controls input[type='checkbox'] {
+  accent-color: var(--accent);
+}
+
+.sound-hint {
+  color: #c9a227;
+}
+
+.remap {
+  margin: 0.75rem auto 0;
+  padding: 0.75rem;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  background: #241a14;
+  text-align: center;
+}
+
+.remap p {
+  margin: 0;
+}
+
+.remap-prompt {
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.remap-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.6rem !important;
+}
+
+.gamepad-status {
+  margin: 0.5rem 0 0;
+  color: #9ad284;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.gamepad-status p {
+  margin: 0.15rem 0;
+}
+
+.controls-hint {
+  margin: 0.5rem 0 0;
+  color: #777;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* Cartridge panel */
+
+.cart-panel {
+  width: var(--screen-width);
+  box-sizing: border-box;
+  padding: 1rem 1.25rem;
+  border: 2px dashed #555;
+  border-radius: 10px;
+  background: #1a1a1a;
+  color: #ccc;
+  text-align: center;
+  transition:
+    border-color 0.15s,
+    background-color 0.15s;
+}
+
+.cart-panel p {
+  margin: 0;
+}
+
+.cart-empty,
+.cart-loaded {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cart-panel[data-state='empty'] .cart-empty,
+.cart-panel[data-state='loaded'] .cart-loaded {
+  display: flex;
+}
+
+.cart-panel[data-state='loaded'] {
+  border-style: solid;
+  border-color: #3d3d3d;
+}
+
+.cart-title {
+  font-size: 1.05rem;
+  color: #eee;
+}
+
+.cart-file {
+  color: #888;
+}
+
+.cart-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cart-actions label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.cart-drop-hint {
+  display: none;
+  font-size: 1.05rem;
+  color: #fff;
+}
+
+.cart-panel.drag-over {
+  border-style: solid;
+  border-color: var(--accent);
+  background: #2d1f16;
+}
+
+.cart-panel.drag-over > :not(.cart-drop-hint) {
+  display: none !important;
+}
+
+.cart-panel.drag-over .cart-drop-hint {
+  display: block;
+}
+
+.zip-files:not([hidden]),
+.bundled-games-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem !important;
+  font-size: 0.85rem;
+  color: #aaa;
+}
+
+.game-info {
+  margin-top: 0.35rem !important;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.game-info a {
+  color: var(--accent-soft);
+}
+
+.zip-buttons {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.zip-buttons button.current {
+  border-color: var(--accent);
+}
+
+.cart-message:not(:empty) {
+  margin-top: 0.6rem;
+  color: #ff8a80;
+  font-size: 0.9rem;
+}
+
+/* Touch controls */
+
+.touch-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: var(--screen-width);
+  max-width: 34rem;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.touch-controls[hidden] {
+  display: none;
+}
+
+.touch-left,
+.touch-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.touch-stick {
+  position: relative;
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2b2b2b 0 55%, #1c1c1c 56%);
+  box-shadow: inset 0 0 0 2px #444;
+  touch-action: none;
+}
+
+.touch-knob {
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #151515);
+  box-shadow: 0 2px 6px rgb(0 0 0 / 60%);
+  pointer-events: none;
+}
+
+.touch-stick.active .touch-knob {
+  background: radial-gradient(circle at 35% 35%, var(--accent-soft), #5a2a10);
+}
+
+.touch-strip {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 14rem;
+  height: 5rem;
+  border-radius: 1rem;
+  background: repeating-linear-gradient(90deg, #262626 0 10px, #1d1d1d 10px 20px);
+  box-shadow: inset 0 0 0 2px #444;
+  color: #888;
+  font-size: 0.85rem;
+  touch-action: none;
+}
+
+.touch-strip.active {
+  box-shadow: inset 0 0 0 2px var(--accent);
+}
+
+.touch-keypad {
+  display: none;
+  grid-template-columns: repeat(3, 3rem);
+  gap: 0.35rem;
+}
+
+.touch-controls[data-controller='paddles'] .touch-stick,
+.touch-controls[data-controller='keypad'] .touch-stick {
+  display: none;
+}
+
+.touch-controls[data-controller='paddles'] .touch-strip {
+  display: flex;
+}
+
+.touch-controls[data-controller='keypad'] .touch-keypad {
+  display: grid;
+}
+
+.touch-controls button {
+  border: 1px solid #555;
+  background: #2a2a2a;
+  color: #eee;
+  font: inherit;
+  touch-action: none;
+}
+
+.touch-controls button.active {
+  background: var(--accent);
+  color: #111;
+}
+
+.touch-keypad button {
+  height: 2.6rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+}
+
+.touch-console {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.touch-console button {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+}
+
+.touch-fire {
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 35% 35%, #ff6a4d, #a3170b) !important;
+  border-color: #6d0f07 !important;
+  color: #fff !important;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 50%);
+}
+
+.touch-fire.active {
+  transform: scale(0.95);
+  filter: brightness(1.2);
+}
+
+/* In full screen the touch controls float over the sides of the picture. */
+.screen-frame:fullscreen .touch-controls {
+  position: absolute;
+  inset: auto 0 1rem;
+  width: 100%;
+  max-width: none;
+  padding: 0 1.5rem;
+  box-sizing: border-box;
+  opacity: 0.75;
+  pointer-events: none;
+}
+
+.screen-frame:fullscreen .touch-controls > * {
+  pointer-events: auto;
+}
