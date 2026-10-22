@@ -1,3 +1,4 @@
+import { trackGameLoaded } from './analytics';
 import type { TvStandard } from './atari2600';
 import { AudioOutput } from './audio/audio-output';
 import type { SchemeName } from './cart/cartridge';
@@ -270,6 +271,7 @@ async function main(): Promise<void> {
         }
         const game = bundledGames.find((entry) => baseName(entry.file) === chosen.name);
         await insertImage(media.image, fromZip ? `${chosen.name} from ${file.name}` : chosen.name, game);
+        trackGameLoaded('atari2600', game?.title);
       },
       onGame: (index) => fetchGame(import.meta.env.BASE_URL, bundledGames[index]),
       onEject: eject,
