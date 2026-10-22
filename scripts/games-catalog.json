@@ -34,6 +34,18 @@
       "hint": "Joystick drives the tank, fire shoots."
     },
     {
+      "title": "Driving Controller Tester",
+      "file": "driving-controller-tester.bin",
+      "url": "https://github.com/alijani1/atari2600-driving-tester/releases/download/v1.0.0/atari2600-driving-tester.a26",
+      "sha256": "68946240a5a5404c5e9d76368eca7aafc40c2f16c2ee434e59d83564cc998884",
+      "credit": "alijani1, 2026",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/alijani1/atari2600-driving-tester/master/LICENSE",
+      "sourceUrl": "https://github.com/alijani1/atari2600-driving-tester",
+      "hint": "Shows both driving controllers. Turn with a stick or the arrow keys; fire sounds the horn.",
+      "controller": "driving"
+    },
+    {
       "title": "Four-Paddle Tester",
       "file": "four-paddle-tester.bin",
       "url": "https://github.com/alijani1/atari2600-4paddle-tester/releases/download/v1.0.0/atari2600-4paddle-tester.a26",
@@ -44,6 +56,39 @@
       "sourceUrl": "https://github.com/alijani1/atari2600-4paddle-tester",
       "hint": "Shows all four paddles. Click the screen and move the mouse, or turn with a stick or the arrow keys.",
       "controller": "paddles"
+    },
+    {
+      "title": "Gene Medic",
+      "file": "gene-medic.bin",
+      "url": "https://raw.githubusercontent.com/moorejh28/genemedic/master/genemedic.bin",
+      "sha256": "6607de021de31c46a867ff9d2b5299333bbf39de562dac8215ddabdf81731f97",
+      "credit": "Jason H. Moore, 2017",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/moorejh28/genemedic/master/LICENSE",
+      "sourceUrl": "https://github.com/moorejh28/genemedic",
+      "hint": "Fire starts. Joystick down edits a gene, up collects a power-up. Heal the patient before the money runs out."
+    },
+    {
+      "title": "Legendary Spear",
+      "file": "legendary-spear.bin",
+      "url": "https://github.com/DChristianson/legendary-spear/releases/download/v1.1/LegendarySpear_NTSC.bin",
+      "sha256": "cd11f5a7f3dc0061873affc29153e8a556d76887f129ea24706ce95c8e8ff833",
+      "credit": "DChristianson, 2021",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/DChristianson/legendary-spear/main/LICENSE",
+      "sourceUrl": "https://github.com/DChristianson/legendary-spear",
+      "hint": "Joystick rides. Hold fire to charge the spear and let go to strike."
+    },
+    {
+      "title": "Ms Snake!",
+      "file": "ms-snake.bin",
+      "url": "https://raw.githubusercontent.com/mad4j/atari-mssnake/v1.1/game/ntsc-pal60/ms-snake%21-NTSC-PAL60.bas.bin",
+      "sha256": "ee1dd9fac2fca8b36571080ae65bee2db6cfd6cb92396402b8de0d06b4709d18",
+      "credit": "Daniele Olmisani, Luca Olmisani and Maria Segnalini, 2013",
+      "license": "GNU GPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/mad4j/atari-mssnake/master/LICENSE",
+      "sourceUrl": "https://github.com/mad4j/atari-mssnake",
+      "hint": "Joystick steers Ms Snake to the food."
     },
     {
       "title": "Paul's HappyBird",
@@ -57,6 +102,17 @@
       "hint": "Fire flaps. Set the left difficulty to A for Pro mode; the Colour/B&W switch pauses."
     },
     {
+      "title": "Pipes 2600",
+      "file": "pipes-2600.bin",
+      "url": "https://raw.githubusercontent.com/albf/pipes-2600/master/pipe2600.bin",
+      "sha256": "5313fe8d2733d7d8e0ce5b53c4708552b8fb4daffe25fb5fb841cee350e7ff60",
+      "credit": "Alexandre Luiz Brisighello Filho (albf), 2016",
+      "license": "MIT License",
+      "licenseFile": "https://raw.githubusercontent.com/albf/pipes-2600/master/LICENSE",
+      "sourceUrl": "https://github.com/albf/pipes-2600",
+      "hint": "Joystick moves the cursor, fire lays the next pipe. Connect the start to the end before the water reaches a gap."
+    },
+    {
       "title": "Snakes",
       "file": "snakes.bin",
       "url": "https://raw.githubusercontent.com/RobinSergeant/2600-Snakes/master/snakes.bin",
@@ -66,6 +122,17 @@
       "licenseFile": "https://raw.githubusercontent.com/RobinSergeant/2600-Snakes/master/license.txt",
       "sourceUrl": "https://github.com/RobinSergeant/2600-Snakes",
       "hint": "Joystick steers the snake."
+    },
+    {
+      "title": "Spider Web",
+      "file": "spider-web.bin",
+      "url": "https://github.com/relic-se/vcs-spider/releases/download/1.0/vcs-spider_ntsc.bin",
+      "sha256": "b7c3586abb18c3760648af451397b2af1b2736aa3b46ce2c66aeba6969176b78",
+      "credit": "D Cooper Dalrymple, 2018",
+      "license": "GNU LGPL v3",
+      "licenseFile": "https://raw.githubusercontent.com/relic-se/vcs-spider/master/LICENSE",
+      "sourceUrl": "https://github.com/relic-se/vcs-spider",
+      "hint": "Joystick moves the spider, fire stuns a bug so you can eat it. Dodge the swatter."
     }
   ]
 }
