@@ -557,3 +557,13 @@ select:disabled {
 .screen-frame:fullscreen .touch-controls > * {
   pointer-events: auto;
 }
+
+@media (max-width: 900px) {
+  main {
+    justify-content: flex-start;
+  }
+
+  body:has(.touch-controls:not([hidden])) {
+    --screen-width: min(96vw, calc((100dvh - 16rem) * var(--screen-aspect)));
+  }
+}
